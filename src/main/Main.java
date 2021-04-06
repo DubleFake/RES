@@ -43,7 +43,6 @@ public class Main {
                 break;
             }
         }
-        //e should be in the range 1-z
         System.out.println("the value of e = " + e);
 
         // calculate d
@@ -56,6 +55,31 @@ public class Main {
             }
         }
         System.out.println("the value of d = " + d);
+    }
+    
+    private static void findAndPrepareVariables(int n) {
+    	
+    	
+    	
+    }
+    
+    private static void test(double[] values) {
+    	
+    	StringBuilder builder = new StringBuilder();
+    	for(double encryptedCharacter: values) {
+    		//BigInteger decryptedCharacter = test2(encryptedCharacter);
+            builder.append(Character.toChars((int)encryptedCharacter));
+        }
+    	
+    	System.out.println("\nTest1: " + builder.toString());
+    	String msg = builder.toString();
+    	  double[] ch = new double[msg.length()];
+          for(int i = 0; i < msg.length(); i++) {
+              ch[i] = msg.codePointAt(i);
+          }
+          System.out.println("Test2: " + decrypt(ch) + "\n");
+    	
+    	
     }
 
     private static int gcd(int e, int z) {
@@ -105,14 +129,41 @@ public class Main {
     }
 
     public static void main(String args[]) {
-        prepareVariables();
-        System.out.println("Enter the text to be encrypted and decrypted");
-        String msg = sc.nextLine();
+    	String mode;
+    	while(true) {
+    		
+    		System.out.println("Enter mode (Encrypt/Decrypt):");
+    		mode = sc.nextLine();
+    		
+    		if(mode.toUpperCase().equals("ENCRYPT") || mode.toUpperCase().equals("DECRYPT"))
+    			break;
+    		else System.out.print("Please enter a valid option.");
+    		
+    	}
+    	String msg;
+    	if(mode.toUpperCase().equals("ENCRYPT")) {
+    		
+            
+            System.out.println("Enter the text to be encrypted");
+            msg = sc.nextLine();
+            prepareVariables();
 
-        double[] c = encrypt(msg);
-        System.out.println("Encrypted message is: " + Arrays.toString(c));
+            double[] c = encrypt(msg);
+            System.out.println("Encrypted message is: " + Arrays.toString(c));
+            
+           test(c);
 
-        String msgBack = decrypt(c);
-        System.out.println("Decrypted message is: " + msgBack);
+            String msgBack = decrypt(c);
+            System.out.println("Decrypted message is: " + msgBack);
+    		
+    	}else {
+    		
+    		System.out.println("Enter the text to be decrypted");
+    		msg = sc.nextLine();
+    		
+    		
+    	}
+
+
     }
 }
