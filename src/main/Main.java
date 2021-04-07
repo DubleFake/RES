@@ -90,20 +90,22 @@ public class Main {
     	
     }
     
-    private static String doubleArrayToString(double[] values) {
+    private static String prepareForSave(double[] values) {
     	
-    	StringBuilder builder = new StringBuilder();
-    	for(double encryptedCharacter: values) 
-            builder.append(Character.toChars((int)encryptedCharacter));
-        
+    	StringBuilder builder = new StringBuilder("");
+    	
+    	for(double encryptedCharacter: values) {
+            builder.append(Double.toString(encryptedCharacter) + " ");
+    	}
     	return builder.toString();
     }
     
     private static double[] stringToDoubleArray(String msg) {
     	
-    	  double[] ch = new double[msg.length()];
-          for(int i = 0; i < msg.length(); i++) 
-              ch[i] = msg.codePointAt(i);
+    	  String temp[] = msg.split("\\s");
+    	  double[] ch = new double[temp.length];
+          for(i = 0; i < temp.length; i++) 
+              ch[i] = Double.parseDouble(temp[i]);
           
     	return ch;
     }
@@ -125,7 +127,7 @@ public class Main {
         for(int i = 0; i < msg.length(); i++) {
             charactersAsNumbers[i] = msg.codePointAt(i);
         }
-       // System.out.println("Plain text as sequence of numbers: " + Arrays.toString(charactersAsNumbers));
+        //System.out.println("Plain text as sequence of numbers: " + Arrays.toString(charactersAsNumbers));
 
         double[] encryptedMsg = new double[msg.length()];
         for(int i = 0; i < charactersAsNumbers.length; i++) {
@@ -174,7 +176,8 @@ public class Main {
             System.out.println("Encrypted message is: " + Arrays.toString(c));
 
             System.out.println("Saving to Database...");
-            Database.addEntry(doubleArrayToString(c), n);
+            
+            Database.addEntry(prepareForSave(c), n);
             System.out.println("Done!");
     		
     	}else {

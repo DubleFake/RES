@@ -51,7 +51,7 @@ public class Database {
 			
 				result[0] = rs.getString("Encrypted_text");
 				result[1] = Integer.toString(rs.getInt("N_value"));
-			
+				
 			}
 			con.close();
 			return result;
