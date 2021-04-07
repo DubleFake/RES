@@ -33,7 +33,7 @@ public class Database {
 
 	}
 	
-	public static String[] loadEntry(int id) {
+	public static String[] loadEntry() {
 		
 		String[] result = new String[2];
 		
@@ -44,9 +44,8 @@ public class Database {
 			r.close();
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", password);
-			String query = "SELECT * FROM `res`.`saves` WHERE `ID` = ?";
+			String query = "SELECT * FROM `res`.`saves` ORDER BY `ID` DESC LIMIT 1";
 			PreparedStatement preparedStmnt = con.prepareStatement(query);
-			preparedStmnt.setInt(1, id);
 			ResultSet rs = preparedStmnt.executeQuery();
 			if(rs.next()) {
 			
