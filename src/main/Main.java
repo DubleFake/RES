@@ -66,6 +66,8 @@ public class Main {
     
     private static void findPQ() {
     	
+    	boolean b = false;
+    	
     	for(int x: primeNumbers) {
     		
     		for(int y: primeNumbers) {
@@ -74,12 +76,14 @@ public class Main {
     				
     				p = x;
     				q = y;
+    				//System.out.println("p = " + p + "\nq = " + q);
+    				b = true;
     				break;
     				
     			}
     			
     		}
-    		
+    		if(b)break;
     	}
     	
     	prepareVariables();
