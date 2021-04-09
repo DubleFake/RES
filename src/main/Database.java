@@ -11,17 +11,18 @@ public class Database {
 
 	
 	
-	public static void addEntry(String data, int n) {
+	public static void addEntry(String data, int n, int e) {
 		try {
 		Scanner r = new Scanner(new File("password.dat"));
 		final String password = r.nextLine();
 		r.close();
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", password);
-		String query = "INSERT INTO `res`.`saves` (`Encrypted_text`, `N_value`) VALUES (?,?)";
+		String query = "INSERT INTO `res`.`saves` (`Encrypted_text`, `N_value`, `E_value`) VALUES (?,?,?)";
 		PreparedStatement preparedStmnt = con.prepareStatement(query);
 		preparedStmnt.setString(1, data);
 		preparedStmnt.setInt(2, n);
+		preparedStmnt.setInt(3, e);
 		preparedStmnt.execute();
 		con.close();
 		}catch(Exception ex) {
@@ -35,7 +36,7 @@ public class Database {
 	
 	public static String[] loadEntry() {
 		
-		String[] result = new String[2];
+		String[] result = new String[3];
 		
 		try {
 			
@@ -51,6 +52,7 @@ public class Database {
 			
 				result[0] = rs.getString("Encrypted_text");
 				result[1] = Integer.toString(rs.getInt("N_value"));
+				result[2] = Integer.toString(rs.getInt("E_value"));
 				
 			}
 			con.close();

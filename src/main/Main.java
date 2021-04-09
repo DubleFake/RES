@@ -167,7 +167,7 @@ public class Main {
     	if(mode.toUpperCase().equals("ENCRYPT")) {
     		
             System.out.println("Enter the text to be encrypted");
-            msg = sc.next();
+            msg = sc.nextLine();
             enterPQ();
 
             double[] c = encrypt(msg);
@@ -175,7 +175,7 @@ public class Main {
 
             System.out.println("Saving to Database...");
             
-            Database.addEntry(prepareForSave(c), n);
+            Database.addEntry(prepareForSave(c), n, e);
             System.out.println("Done!");
     		
     	}else {
